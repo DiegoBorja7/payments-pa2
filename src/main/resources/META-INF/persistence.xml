@@ -1,0 +1,52 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation = "https://jakarta.ee/xml/ns/persistence
+                                   https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
+             version="3.1">
+    <persistence-unit name="UnitPersistenceDB" transaction-type="RESOURCE_LOCAL">
+        <class>ec.edu.uce.jakarta.notifications.jpa.Student</class>
+        <class>ec.edu.uce.jakarta.notifications.jpa.Message</class>
+        <properties>
+
+            <property name= "javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/example" />
+            <property name= "javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name= "javax.persistence.jdbc.user" value="postgres" />
+            <property name= "javax.persistence.jdbc.password" value="admin" />
+
+            <property name= "hibernate.show_sql" value="true" />
+            <property name= "hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.show.sql" value="true" />
+            <property name="hibernate.format.sql" value="update" />
+
+            <property name="hibernate.sqm.multi_table_strategy" value="none" />
+        </properties>
+
+    </persistence-unit>
+
+    <persistence-unit name="UnitPersistencePaymentsDB" transaction-type="RESOURCE_LOCAL">
+        <class>ec.edu.uce.jakarta.payments.classes.Account</class>
+        <class>ec.edu.uce.jakarta.payments.classes.Bank</class>
+        <class>ec.edu.uce.jakarta.payments.classes.Product</class>
+        <class>ec.edu.uce.jakarta.payments.classes.Records</class>
+        <class>ec.edu.uce.jakarta.payments.classes.User</class>
+        <properties>
+
+            <property name= "javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/paymentdb" />
+            <property name= "javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name= "javax.persistence.jdbc.user" value="postgres" />
+            <property name= "javax.persistence.jdbc.password" value="admin" />
+
+            <property name= "hibernate.show_sql" value="true" />
+            <property name= "hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.show.sql" value="true" />
+            <property name="hibernate.format.sql" value="update" />
+
+            <property name="hibernate.sqm.multi_table_strategy" value="none" />
+        </properties>
+
+    </persistence-unit>
+</persistence>
