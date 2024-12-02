@@ -1,19 +1,20 @@
-package ec.edu.uce.jakarta.notifications.jpa;
+package ec.edu.uce.jakarta.payments.services;
 
-
+import ec.edu.uce.jakarta.payments.classes.User;
 import jakarta.persistence.EntityManager;
 
-public class StudentServices {
+public class UserServices {
     private EntityManager entityManager;
 
-    public StudentServices(EntityManager entityManager) {
+    public UserServices(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-    //create
-    public void createStudent(Student student) {
+
+    //crear usuario
+    public void createUser(User user) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(student); // Persiste el nuevo estudiante
+            entityManager.persist(user);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -23,52 +24,49 @@ public class StudentServices {
         }
     }
 
-    //read
-    public Student findByID(int id) {
-        Student student = null;
+    //leer usuario
+    public User findByID(int id) {
+        User user = null;
 
         try {
             entityManager.getTransaction().begin();
-            student = entityManager.find(Student.class, id);
+            user = entityManager.find(User.class, id);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-
             e.printStackTrace();
         }
-        return student;
+        return user;
     }
 
-    //update
-    public void update(Student student) {
+    //actualizar
+    public void update(User user) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(student);
+            entityManager.merge(user);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-
             e.printStackTrace();
         }
     }
 
-    //delete
+    //eliminar
     public void delete(int id) {
-        Student student = findByID(id);
+        User user = findByID(id);
 
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(student);
+            entityManager.remove(user);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
             }
-
             e.printStackTrace();
         }
     }

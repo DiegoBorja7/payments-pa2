@@ -6,6 +6,8 @@ import ec.edu.uce.jakarta.notifications.jpa.Student;
 import ec.edu.uce.jakarta.notifications.jpa.StudentServices;
 import ec.edu.uce.jakarta.payments.IPay;
 import ec.edu.uce.jakarta.payments.QualifierPayment;
+import ec.edu.uce.jakarta.payments.classes.User;
+import ec.edu.uce.jakarta.payments.services.UserServices;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -83,6 +85,19 @@ public class HelloResource {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("UnitPersistencePaymentsDB");
         EntityManager entityManage = entityManagerFactory.createEntityManager();
 
-        return "Creacion exitosa.";
+        User u = new User();
+        UserServices userServices = new UserServices(entityManage);
+
+        //userServices.createUser(new User("glis", "quito", "0963", "@uce.edu"));
+
+        u = userServices.findByID(3);
+
+        /*u.setName("test");
+        u.setEmail("@espe");
+        userServices.update(u);*/
+
+        userServices.delete(4);
+
+        return u.toString();
     }
 }
