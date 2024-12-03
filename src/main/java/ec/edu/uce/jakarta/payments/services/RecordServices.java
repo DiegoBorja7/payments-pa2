@@ -1,20 +1,20 @@
 package ec.edu.uce.jakarta.payments.services;
 
-import ec.edu.uce.jakarta.payments.classes.User;
+import ec.edu.uce.jakarta.payments.classes.Record;
 import jakarta.persistence.EntityManager;
 
-public class UserServices {
+public class RecordServices {
     private EntityManager entityManager;
 
-    public UserServices(EntityManager entityManager) {
+    public RecordServices(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    //crear usuario
-    public void createUser(User user) {
+    //crear cuenta
+    public void createRecord(Record record) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(user);
+            entityManager.persist(record);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -25,12 +25,12 @@ public class UserServices {
     }
 
     //leer usuario
-    public User findByIDUser(int id) {
-        User user = null;
+    public Record findByIDRecord(int id) {
+        Record record = null;
 
         try {
             entityManager.getTransaction().begin();
-            user = entityManager.find(User.class, id);
+            record = entityManager.find(Record.class, id);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -38,14 +38,14 @@ public class UserServices {
             }
             e.printStackTrace();
         }
-        return user;
+        return record;
     }
 
     //actualizar
-    public void updateUser(User user) {
+    public void updateRecord(Record record) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(user);
+            entityManager.merge(record);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -56,12 +56,12 @@ public class UserServices {
     }
 
     //eliminar
-    public void deleteUser(int id) {
-        User user = findByIDUser(id);
+    public void deleteRecord(int id) {
+        Record record = findByIDRecord(id);
 
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(user);
+            entityManager.remove(record);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {

@@ -1,20 +1,20 @@
 package ec.edu.uce.jakarta.payments.services;
 
-import ec.edu.uce.jakarta.payments.classes.User;
+import ec.edu.uce.jakarta.payments.classes.Product;
 import jakarta.persistence.EntityManager;
 
-public class UserServices {
+public class ProductServices {
     private EntityManager entityManager;
 
-    public UserServices(EntityManager entityManager) {
+    public ProductServices(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    //crear usuario
-    public void createUser(User user) {
+    //crear producto
+    public void createProduct(Product product) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(user);
+            entityManager.persist(product);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -25,12 +25,12 @@ public class UserServices {
     }
 
     //leer usuario
-    public User findByIDUser(int id) {
-        User user = null;
+    public Product findByIDProduct(int id) {
+        Product product = null;
 
         try {
             entityManager.getTransaction().begin();
-            user = entityManager.find(User.class, id);
+            product = entityManager.find(Product.class, id);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -38,14 +38,14 @@ public class UserServices {
             }
             e.printStackTrace();
         }
-        return user;
+        return product;
     }
 
     //actualizar
-    public void updateUser(User user) {
+    public void updateProduct(Product product) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(user);
+            entityManager.merge(product);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -56,12 +56,12 @@ public class UserServices {
     }
 
     //eliminar
-    public void deleteUser(int id) {
-        User user = findByIDUser(id);
+    public void deleteProduct(int id) {
+        Product product = findByIDProduct(id);
 
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(user);
+            entityManager.remove(product);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {

@@ -26,6 +26,12 @@ public class Account {
     public Account() {
     }
 
+    public Account( Double balance, Bank bank, User client) {
+        this.balance = balance;
+        this.bank = bank;
+        this.client = client;
+    }
+
     public int getNumberAccount() {
         return numberAccount;
     }
@@ -56,5 +62,15 @@ public class Account {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "numberAccount=" + numberAccount +
+                ", balance=" + balance +
+                ", bank=" + bank +
+                ", client=" + client +
+                '}';
     }
 }

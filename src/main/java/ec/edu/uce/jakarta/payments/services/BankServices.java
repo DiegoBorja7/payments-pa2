@@ -1,20 +1,20 @@
 package ec.edu.uce.jakarta.payments.services;
 
-import ec.edu.uce.jakarta.payments.classes.User;
+import ec.edu.uce.jakarta.payments.classes.Bank;
 import jakarta.persistence.EntityManager;
 
-public class UserServices {
+public class BankServices {
     private EntityManager entityManager;
 
-    public UserServices(EntityManager entityManager) {
+    public BankServices(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    //crear usuario
-    public void createUser(User user) {
+    //crear banco
+    public void createBank(Bank bank) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(user);
+            entityManager.persist(bank);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -25,12 +25,12 @@ public class UserServices {
     }
 
     //leer usuario
-    public User findByIDUser(int id) {
-        User user = null;
+    public Bank findByIDBank(int id) {
+        Bank bank = null;
 
         try {
             entityManager.getTransaction().begin();
-            user = entityManager.find(User.class, id);
+            bank = entityManager.find(Bank.class, id);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -38,14 +38,14 @@ public class UserServices {
             }
             e.printStackTrace();
         }
-        return user;
+        return bank;
     }
 
     //actualizar
-    public void updateUser(User user) {
+    public void updateBank(Bank bank) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(user);
+            entityManager.merge(bank);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -56,12 +56,12 @@ public class UserServices {
     }
 
     //eliminar
-    public void deleteUser(int id) {
-        User user = findByIDUser(id);
+    public void deleteBank(int id) {
+        Bank bank = findByIDBank(id);
 
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(user);
+            entityManager.remove(bank);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {

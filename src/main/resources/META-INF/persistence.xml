@@ -29,7 +29,7 @@
         <class>ec.edu.uce.jakarta.payments.classes.Account</class>
         <class>ec.edu.uce.jakarta.payments.classes.Bank</class>
         <class>ec.edu.uce.jakarta.payments.classes.Product</class>
-        <class>ec.edu.uce.jakarta.payments.classes.Records</class>
+        <class>ec.edu.uce.jakarta.payments.classes.Record</class>
         <class>ec.edu.uce.jakarta.payments.classes.User</class>
         <properties>
 

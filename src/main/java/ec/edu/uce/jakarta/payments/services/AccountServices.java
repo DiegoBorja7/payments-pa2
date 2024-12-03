@@ -1,20 +1,20 @@
 package ec.edu.uce.jakarta.payments.services;
 
-import ec.edu.uce.jakarta.payments.classes.User;
+import ec.edu.uce.jakarta.payments.classes.Account;
 import jakarta.persistence.EntityManager;
 
-public class UserServices {
+public class AccountServices {
     private EntityManager entityManager;
 
-    public UserServices(EntityManager entityManager) {
+    public AccountServices(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    //crear usuario
-    public void createUser(User user) {
+    //crear cuenta
+    public void createAccount(Account account) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(user);
+            entityManager.persist(account);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -25,12 +25,12 @@ public class UserServices {
     }
 
     //leer usuario
-    public User findByIDUser(int id) {
-        User user = null;
+    public Account findByIDAccount(int id) {
+        Account account = null;
 
         try {
             entityManager.getTransaction().begin();
-            user = entityManager.find(User.class, id);
+            account = entityManager.find(Account.class, id);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -38,14 +38,14 @@ public class UserServices {
             }
             e.printStackTrace();
         }
-        return user;
+        return account;
     }
 
     //actualizar
-    public void updateUser(User user) {
+    public void updateAccount(Account account) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(user);
+            entityManager.merge(account);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {
@@ -56,12 +56,12 @@ public class UserServices {
     }
 
     //eliminar
-    public void deleteUser(int id) {
-        User user = findByIDUser(id);
+    public void deleteAccount(int id) {
+        Account account = findByIDAccount(id);
 
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(user);
+            entityManager.remove(account);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             if (entityManager.getTransaction().isActive()) {

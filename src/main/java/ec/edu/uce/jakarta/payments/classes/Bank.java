@@ -12,6 +12,10 @@ public class Bank {
     public Bank() {
     }
 
+    public Bank(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
@@ -24,7 +28,11 @@ public class Bank {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
