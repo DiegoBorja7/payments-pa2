@@ -1,9 +1,6 @@
 package ec.edu.uce.jakarta.payments.run;
 
-import ec.edu.uce.jakarta.notifications.jpa.Message;
-import ec.edu.uce.jakarta.notifications.jpa.MessageServices;
-import ec.edu.uce.jakarta.notifications.jpa.Student;
-import ec.edu.uce.jakarta.notifications.jpa.StudentServices;
+import ec.edu.uce.jakarta.notifications.jpa.*;
 import ec.edu.uce.jakarta.payments.IPay;
 import ec.edu.uce.jakarta.payments.QualifierPayment;
 import ec.edu.uce.jakarta.payments.classes.*;
@@ -18,7 +15,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
@@ -73,13 +69,32 @@ public class HelloResource {
     @Path("/jpa")
     public String jpaServices() {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("UnitPersistenceDB");
-        EntityManager entityManage = entityManagerFactory.createEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        StudentServices student = new StudentServices(entityManage);
+        /*StudentServices student = new StudentServices(entityManager);
         student.createStudent(new Student(4,"lis"));
 
-        MessageServices message = new MessageServices(entityManage);
-        message.createMessge(new Message("mensaje de prueba."));
+        MessageServices message = new MessageServices(entityManager);
+        message.createMessge(new Message("mensaje de prueba."));*/
+
+
+        Address address = new Address();
+        address.setCity("Quito");
+        address.setNumber("oe 11422");
+        address.setStreet("primavera");
+        address.setStreet2("--");
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(address);
+        entityManager.getTransaction().commit();
+
+        Employee employee = new Employee();
+        employee.setName("gl");
+        employee.setAddress(address);
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(employee);
+        entityManager.getTransaction().commit();
 
         return "Creacion exitosa.";
     }

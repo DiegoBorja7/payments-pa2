@@ -6,6 +6,8 @@
     <persistence-unit name="UnitPersistenceDB" transaction-type="RESOURCE_LOCAL">
         <class>ec.edu.uce.jakarta.notifications.jpa.Student</class>
         <class>ec.edu.uce.jakarta.notifications.jpa.Message</class>
+        <class>ec.edu.uce.jakarta.notifications.jpa.Employee</class>
+        <class>ec.edu.uce.jakarta.notifications.jpa.Address</class>
         <properties>
 
             <property name= "javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/example" />
