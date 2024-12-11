@@ -49,6 +49,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>10.0.0</version> <!-- Usa la versión que necesites -->
+            <scope>provided</scope>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/jakarta.inject/jakarta.inject-api -->
         <dependency>
             <groupId>jakarta.inject</groupId>
@@ -67,6 +74,7 @@
             <artifactId>hibernate-core</artifactId>
             <version>6.6.3.Final</version>
         </dependency>
+
     </dependencies>
 
     <build>

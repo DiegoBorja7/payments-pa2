@@ -4,10 +4,12 @@
                                    https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
              version="3.1">
     <persistence-unit name="UnitPersistenceDB" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>ec.edu.uce.jakarta.notifications.jpa.Student</class>
         <class>ec.edu.uce.jakarta.notifications.jpa.Message</class>
         <class>ec.edu.uce.jakarta.notifications.jpa.Employee</class>
         <class>ec.edu.uce.jakarta.notifications.jpa.Address</class>
+        <class>ec.edu.uce.jakarta.notifications.jpa.Courses</class>
         <properties>
 
             <property name= "javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/example" />
@@ -20,19 +22,18 @@
 
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show.sql" value="true" />
-            <property name="hibernate.format.sql" value="update" />
-
-            <property name="hibernate.sqm.multi_table_strategy" value="none" />
+            <property name="hibernate.format.sql" value="true" />
         </properties>
 
     </persistence-unit>
 
     <persistence-unit name="UnitPersistencePaymentsDB" transaction-type="RESOURCE_LOCAL">
-        <class>ec.edu.uce.jakarta.payments.classes.Account</class>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>ec.edu.uce.jakarta.payments.classes.Bank</class>
         <class>ec.edu.uce.jakarta.payments.classes.Product</class>
         <class>ec.edu.uce.jakarta.payments.classes.Record</class>
         <class>ec.edu.uce.jakarta.payments.classes.User</class>
+        <class>ec.edu.uce.jakarta.payments.classes.Account</class>
         <properties>
 
             <property name= "javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/paymentdb" />
@@ -45,9 +46,7 @@
 
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show.sql" value="true" />
-            <property name="hibernate.format.sql" value="update" />
-
-            <property name="hibernate.sqm.multi_table_strategy" value="none" />
+            <property name="hibernate.format.sql" value="true" />
         </properties>
 
     </persistence-unit>

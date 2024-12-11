@@ -10,6 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -17,10 +18,12 @@ import jakarta.ws.rs.Produces;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 
 @Path("/hello-world")
 public class HelloResource {
+    private StringBuilder text;
 
     @Inject
     @QualifierPayment("creditcard")
@@ -33,6 +36,21 @@ public class HelloResource {
     @Inject
     @QualifierPayment("transfer")
     IPay transfer;
+
+    @Inject
+    EmployeeServices employeeServices;
+
+    @Inject
+    AddressServices addressServices;
+
+
+    /// ////
+
+    @Inject
+    AccountServices accountServices;
+
+    @Inject
+    RecordServices recordServices;
 
     @GET
     @Produces("text/plain")
@@ -66,37 +84,45 @@ public class HelloResource {
 
     @GET
     @Produces("text/plain")
-    @Path("/jpa")
-    public String jpaServices() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("UnitPersistenceDB");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+    @Path("/get/{id}")
+    public String getEmployee(@PathParam("id") int id) {
+        Employee e = employeeServices.findByIDEmployee(id);
 
-        /*StudentServices student = new StudentServices(entityManager);
-        student.createStudent(new Student(4,"lis"));
+        if(e == null)
+            return "No existe el empleado";
+        else
+            return "Hola " + e.getName();
+    }
 
-        MessageServices message = new MessageServices(entityManager);
-        message.createMessge(new Message("mensaje de prueba."));*/
+    @GET
+    @Produces("text/plain")
+    @Path("/getallemployees")
+    public String getAllEmployee() {
+        text = new StringBuilder();
+        List<Employee> allEmployees = employeeServices.getAllEmployees();
 
+        text.append("Empleados >> \n");
+        for(Employee e:allEmployees){
+            text.append(e.getName()).append("\n");
+        }
 
-        Address address = new Address();
-        address.setCity("Quito");
-        address.setNumber("oe 11422");
-        address.setStreet("primavera");
-        address.setStreet2("--");
+        return text.toString();
+    }
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(address);
-        entityManager.getTransaction().commit();
+    @GET
+    @Produces("text/plain")
+    @Path("/getallemployeesandaddress")
+    public String getAllEmployeeandAddress() {
+        text = new StringBuilder();
+        List<Employee> allEmployeesandAddress = employeeServices.getAllEmployeesWithAddress();
 
-        Employee employee = new Employee();
-        employee.setName("gl");
-        employee.setAddress(address);
+        text.append("Empleados y Direccion>> \n");
+        for(Employee e:allEmployeesandAddress){
+            text.append(e.getName()).append(" - ");
+            text.append(e.getAddress().getStreet()).append("\n");
+        }
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(employee);
-        entityManager.getTransaction().commit();
-
-        return "Creacion exitosa.";
+        return text.toString();
     }
 
     @GET
@@ -115,8 +141,6 @@ public class HelloResource {
         UserServices userServices = new UserServices(entityManage);
         ProductServices productServices = new ProductServices(entityManage);
         BankServices bankServices = new BankServices(entityManage);
-        AccountServices accountServices = new AccountServices(entityManage);
-        RecordServices recordServices = new RecordServices(entityManage);
 
         //userServices.createUser(new User("glis", "quito", "0963", "@uce.edu"));
 

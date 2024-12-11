@@ -1,13 +1,19 @@
 package ec.edu.uce.jakarta.payments.services;
 
 import ec.edu.uce.jakarta.payments.classes.Record;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
+@Stateless
 public class RecordServices {
+    private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
-    public RecordServices(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public RecordServices() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("UnitPersistencePaymentsDB");
+        entityManager = entityManagerFactory.createEntityManager();
     }
 
     //crear cuenta

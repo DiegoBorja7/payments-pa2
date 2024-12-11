@@ -1,41 +1,33 @@
 package ec.edu.uce.jakarta.notifications.jpa;
 
-
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceUnit;
 
+@Stateless
 public class StudentServices {
+    @PersistenceUnit(unitName = "UnitPersistenceDB")
     private EntityManager entityManager;
 
-    public StudentServices(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public StudentServices() {
     }
+
     //create
     public void createStudent(Student student) {
         try {
-            entityManager.getTransaction().begin();
             entityManager.persist(student); // Persiste el nuevo estudiante
-            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
             e.printStackTrace();
         }
     }
 
+
     //read
     public Student findByID(int id) {
         Student student = null;
-
         try {
-            entityManager.getTransaction().begin();
             student = entityManager.find(Student.class, id);
-            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-
             e.printStackTrace();
         }
         return student;
@@ -44,14 +36,8 @@ public class StudentServices {
     //update
     public void update(Student student) {
         try {
-            entityManager.getTransaction().begin();
             entityManager.merge(student);
-            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-
             e.printStackTrace();
         }
     }
@@ -61,14 +47,8 @@ public class StudentServices {
         Student student = findByID(id);
 
         try {
-            entityManager.getTransaction().begin();
             entityManager.merge(student);
-            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
-
             e.printStackTrace();
         }
     }

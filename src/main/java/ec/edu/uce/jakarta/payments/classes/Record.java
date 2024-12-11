@@ -1,5 +1,6 @@
 package ec.edu.uce.jakarta.payments.classes;
 
+import ec.edu.uce.jakarta.payments.IPay;
 import jakarta.persistence.*;
 
 import java.util.Date;
