@@ -1,6 +1,6 @@
 package ec.edu.uce.jakarta.payments.services;
 
-import ec.edu.uce.jakarta.payments.classes.Product;
+import ec.edu.uce.jakarta.payments.model.Product;
 import jakarta.persistence.EntityManager;
 
 public class ProductServices {

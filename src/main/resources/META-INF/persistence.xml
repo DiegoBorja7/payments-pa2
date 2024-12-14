@@ -29,11 +29,11 @@
 
     <persistence-unit name="UnitPersistencePaymentsDB" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>ec.edu.uce.jakarta.payments.classes.Bank</class>
-        <class>ec.edu.uce.jakarta.payments.classes.Product</class>
-        <class>ec.edu.uce.jakarta.payments.classes.Record</class>
-        <class>ec.edu.uce.jakarta.payments.classes.User</class>
-        <class>ec.edu.uce.jakarta.payments.classes.Account</class>
+        <class>ec.edu.uce.jakarta.payments.model.Bank</class>
+        <class>ec.edu.uce.jakarta.payments.model.Product</class>
+        <class>ec.edu.uce.jakarta.payments.model.Record</class>
+        <class>ec.edu.uce.jakarta.payments.model.User</class>
+        <class>ec.edu.uce.jakarta.payments.model.Account</class>
         <properties>
 
             <property name= "javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/paymentdb" />

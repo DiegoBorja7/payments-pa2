@@ -1,9 +1,9 @@
-package ec.edu.uce.jakarta.payments;
+package ec.edu.uce.jakarta.payments.model;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-@QualifierPayment("creditcard")
+@QualifierPayment("CREDIT_CARD")
 public class CreditCardPayment implements IPay {
 
 	@Override

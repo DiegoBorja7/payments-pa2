@@ -1,6 +1,6 @@
 package ec.edu.uce.jakarta.payments.services;
 
-import ec.edu.uce.jakarta.payments.classes.Record;
+import ec.edu.uce.jakarta.payments.model.Record;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

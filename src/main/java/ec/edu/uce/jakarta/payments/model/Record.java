@@ -1,6 +1,5 @@
-package ec.edu.uce.jakarta.payments.classes;
+package ec.edu.uce.jakarta.payments.model;
 
-import ec.edu.uce.jakarta.payments.IPay;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -10,8 +9,11 @@ public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private Date paymentDate;
-    private String paymentType; //esta variable deberia enlazarse con los tipos de pagos ya implementados
+
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType;
     private String description;
     private String paymentStatus; // Enum sugerido: PENDIENTE, COMPLETADO, FALLIDO
     //private List <Product> products;
@@ -24,13 +26,53 @@ public class Record {
     public Record() {
     }
 
-    public Record(Date paymentDate, String paymentType, String description, String paymentStatus, Double amount, Account account) {
+    public Record(Date paymentDate, PaymentType paymentType, String description, String paymentStatus, Double amount, Account account) {
         this.paymentDate = paymentDate;
         this.paymentType = paymentType;
         this.description = description;
         this.paymentStatus = paymentStatus;
         this.amount = amount;
         this.account = account;
+    }
+
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public PaymentType getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(PaymentType paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 
     public Account getAccount() {
@@ -46,7 +88,7 @@ public class Record {
         return "Record{" +
                 "id=" + id +
                 ", paymentDate=" + paymentDate +
-                ", paymentType='" + paymentType + '\'' +
+                ", paymentType=" + paymentType +
                 ", description='" + description + '\'' +
                 ", paymentStatus='" + paymentStatus + '\'' +
                 ", amount=" + amount +

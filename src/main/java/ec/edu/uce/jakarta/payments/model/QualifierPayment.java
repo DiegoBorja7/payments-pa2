@@ -1,4 +1,4 @@
-package ec.edu.uce.jakarta.payments;
+package ec.edu.uce.jakarta.payments.model;
 
 import jakarta.inject.Qualifier;
 

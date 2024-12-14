@@ -1,9 +1,9 @@
-package ec.edu.uce.jakarta.payments;
+package ec.edu.uce.jakarta.payments.model;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-@QualifierPayment("transfer")
+@QualifierPayment("TRANSFER")
 public class TransferPayment implements IPay {
 
 	@Override

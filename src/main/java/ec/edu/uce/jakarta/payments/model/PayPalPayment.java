@@ -1,9 +1,9 @@
-package ec.edu.uce.jakarta.payments;
+package ec.edu.uce.jakarta.payments.model;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-@QualifierPayment("paypal")
+@QualifierPayment("PAYPAL")
 public class PayPalPayment implements IPay {
 
 	@Override

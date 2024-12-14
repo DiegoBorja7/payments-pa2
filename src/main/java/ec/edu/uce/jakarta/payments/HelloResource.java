@@ -1,10 +1,8 @@
-package ec.edu.uce.jakarta.payments.run;
+package ec.edu.uce.jakarta.payments;
 
 import ec.edu.uce.jakarta.notifications.jpa.*;
-import ec.edu.uce.jakarta.payments.IPay;
-import ec.edu.uce.jakarta.payments.QualifierPayment;
-import ec.edu.uce.jakarta.payments.classes.*;
-import ec.edu.uce.jakarta.payments.classes.Record;
+import ec.edu.uce.jakarta.payments.model.*;
+import ec.edu.uce.jakarta.payments.model.Record;
 import ec.edu.uce.jakarta.payments.services.*;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -26,23 +24,10 @@ public class HelloResource {
     private StringBuilder text;
 
     @Inject
-    @QualifierPayment("creditcard")
-    IPay creditCard;
-
-    @Inject
-    @QualifierPayment("paypal")
-    IPay paypal;
-
-    @Inject
-    @QualifierPayment("transfer")
-    IPay transfer;
-
-    @Inject
     EmployeeServices employeeServices;
 
     @Inject
     AddressServices addressServices;
-
 
     /// ////
 
@@ -51,6 +36,9 @@ public class HelloResource {
 
     @Inject
     RecordServices recordServices;
+
+    @Inject
+    PaymentServices paymentServices;
 
     @GET
     @Produces("text/plain")
@@ -63,7 +51,7 @@ public class HelloResource {
     @Path("/credit-card")
     public String creditCardPayment() {
 
-        return creditCard.pay("diego.borja", "@uce.edu.ec", "Exitoso");
+        return "";//creditCard.pay("diego.borja", "@uce.edu.ec", "Exitoso");
     }
 
     @GET
@@ -71,7 +59,7 @@ public class HelloResource {
     @Path("/pay-pal")
     public String paypalPayment() {
 
-        return paypal.pay("diego.borja", "@uce.edu.ec", "Exitoso");
+        return "";//paypal.pay("diego.borja", "@uce.edu.ec", "Exitoso");
     }
 
     @GET
@@ -79,7 +67,7 @@ public class HelloResource {
     @Path("/transfer")
     public String transferPayment() {
 
-        return transfer.pay("diego.borja", "@uce.edu.ec", "Exitoso");
+        return "";//transfer.pay("diego.borja", "@uce.edu.ec", "Exitoso");
     }
 
     @GET
@@ -162,12 +150,13 @@ public class HelloResource {
         //accountServices.createAccount(new Account(10.5,b,u));
         a = accountServices.findByIDAccount(1000);
 
+        //obtenemos la fecha actual al momento de realizar una transaccion
         LocalDateTime currentDateTime = LocalDateTime.now();
         java.util.Date date = Date.from(currentDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
-        //recordServices.createRecord(new Record(date,"transfer","pago","OK",7.7,a));
-        r = recordServices.findByIDRecord(1);
+        //recordServices.createRecord(new Record(date,PaymentType.CREDIT_CARD,"pago cc","check",1000.10,a));
+        r = recordServices.findByIDRecord(11);
 
-        return r.toString();
+        return paymentServices.processPayment(r,"uce.edu.ec", "funciona");
     }
 }

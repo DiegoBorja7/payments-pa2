@@ -1,4 +1,4 @@
-package ec.edu.uce.jakarta.payments.classes;
+package ec.edu.uce.jakarta.payments.model;
 
 import jakarta.persistence.*;
 
