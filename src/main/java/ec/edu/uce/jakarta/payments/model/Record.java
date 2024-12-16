@@ -11,12 +11,11 @@ public class Record {
     private int id;
 
     private Date paymentDate;
-
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
     private String description;
-    private String paymentStatus; // Enum sugerido: PENDIENTE, COMPLETADO, FALLIDO
-    //private List <Product> products;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
     private Double amount;
 
     @ManyToOne
@@ -26,7 +25,7 @@ public class Record {
     public Record() {
     }
 
-    public Record(Date paymentDate, PaymentType paymentType, String description, String paymentStatus, Double amount, Account account) {
+    public Record(Date paymentDate, PaymentType paymentType, String description, PaymentStatus paymentStatus, Double amount, Account account) {
         this.paymentDate = paymentDate;
         this.paymentType = paymentType;
         this.description = description;
@@ -59,11 +58,11 @@ public class Record {
         this.description = description;
     }
 
-    public String getPaymentStatus() {
+    public PaymentStatus getPaymentStatus() {
         return paymentStatus;
     }
 
-    public void setPaymentStatus(String paymentStatus) {
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
 

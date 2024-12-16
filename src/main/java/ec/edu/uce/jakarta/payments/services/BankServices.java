@@ -1,13 +1,22 @@
 package ec.edu.uce.jakarta.payments.services;
 
 import ec.edu.uce.jakarta.payments.model.Bank;
+import ec.edu.uce.jakarta.payments.model.User;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
+import java.util.List;
+
+@Stateless
 public class BankServices {
+    private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
-    public BankServices(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public BankServices() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("UnitPersistencePaymentsDB");
+        entityManager = entityManagerFactory.createEntityManager();
     }
 
     //crear banco
@@ -39,6 +48,22 @@ public class BankServices {
             e.printStackTrace();
         }
         return bank;
+    }
+
+    public List<Bank> getAllBanks() {
+        List<Bank> banks = null;
+        String query = "SELECT b FROM Bank b";
+        try {
+            entityManager.getTransaction().begin();
+            banks = entityManager.createQuery(query, Bank.class).getResultList();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+        return banks;
     }
 
     //actualizar

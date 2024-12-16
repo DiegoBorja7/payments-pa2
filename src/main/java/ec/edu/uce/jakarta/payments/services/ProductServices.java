@@ -1,13 +1,19 @@
 package ec.edu.uce.jakarta.payments.services;
 
 import ec.edu.uce.jakarta.payments.model.Product;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
+@Stateless
 public class ProductServices {
+    private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
-    public ProductServices(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public ProductServices() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("UnitPersistencePaymentsDB");
+        entityManager = entityManagerFactory.createEntityManager();
     }
 
     //crear producto

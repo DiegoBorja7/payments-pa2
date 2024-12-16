@@ -1,13 +1,22 @@
 package ec.edu.uce.jakarta.payments.services;
 
 import ec.edu.uce.jakarta.payments.model.User;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
+import java.util.Collections;
+import java.util.List;
+
+@Stateless
 public class UserServices {
+    private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
-    public UserServices(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public UserServices() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("UnitPersistencePaymentsDB");
+        entityManager = entityManagerFactory.createEntityManager();
     }
 
     //crear usuario
@@ -22,6 +31,22 @@ public class UserServices {
             }
             e.printStackTrace();
         }
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = null;
+        String query = "SELECT u FROM User u";
+        try {
+            entityManager.getTransaction().begin();
+            users = entityManager.createQuery(query, User.class).getResultList();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+        return users;
     }
 
     //leer usuario
