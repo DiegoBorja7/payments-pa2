@@ -23,8 +23,6 @@ public class ClasesResource {
     @Inject
     private CourseService coursesService;
 
-    /// Endpoints para las clases de ejemplo realizados en el aula
-
     @GET
     @Produces("text/plain")
     @Path("/get/{id}")
@@ -68,12 +66,30 @@ public class ClasesResource {
         return text.toString();
     }
 
+    //CREAR UN JOIN CON UN LISTADO DE ESTUDIANTES PERTENECIENTE A 1 CURSO
+    @GET
+    @Produces("text/plain")
+    @Path("/getAllStudentsOfCourse")
+    public String getAllStudentsOfCourse(@QueryParam("course") int course) {
+        text = new StringBuilder();
+        List<Employee> allEmployeesandAddress = employeeServices.getAllEmployeesWithAddress();
+        List<Student> students = studentServices.getAllStudentsOfCourse(course);
+
+        text.append("Estudiantes y Clase >> \n");
+        for(Student s :students){
+            text.append(s.getName()).append(" - ");
+            text.append(s.getCourse().getName()).append("\n");
+        }
+
+        return text.toString();
+    }
+
     @GET
     @Produces("text/plain")
     @Path("/saveEmployee")
     public String saveEmployee(@QueryParam("name") String name) {
         Employee e = new Employee();
-        Address a = new Address();
+        Address a;
 
         Random random = new Random();
 
@@ -100,24 +116,14 @@ public class ClasesResource {
         return text.toString();
     }
 
-
     @GET
     @Produces("text/plain")
-    @Path("/test")
+    @Path("/main")
     public String test() {
-        Student s = new Student();
+        Student s;
         Course c = new Course();
 
-//        s.setId(4);
-//        s.setName("liz");
-//        studentServices.createStudent(s);
         s = studentServices.findByID(4);
-
-//        c.setName("matematicas");
-//        c.setDescription("2do semestre");
-//        coursesService.createCourse(c);
-
-        //CREAR UN JOIN CON UN LISTADO DE ESTUDIANTES PERTENECIENTE A 1 CURSO
 
         return s.toString();
     }

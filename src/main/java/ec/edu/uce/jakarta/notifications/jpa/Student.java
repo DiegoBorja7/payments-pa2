@@ -12,7 +12,7 @@ public class Student {
     private String name;
 
     @ManyToOne
-    Course course;
+    private Course course;
 
     public Student() {}
 
@@ -35,6 +35,14 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     @Override
