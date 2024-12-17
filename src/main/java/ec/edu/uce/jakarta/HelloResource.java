@@ -1,10 +1,11 @@
-package ec.edu.uce.jakarta.payments;
+package ec.edu.uce.jakarta;
 
 import ec.edu.uce.jakarta.notifications.jpa.*;
 import ec.edu.uce.jakarta.payments.model.*;
 import ec.edu.uce.jakarta.payments.model.Record;
 import ec.edu.uce.jakarta.payments.services.*;
 import jakarta.inject.Inject;
+
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -17,16 +18,6 @@ import java.util.List;
 
 @Path("/application")
 public class HelloResource {
-    private StringBuilder text;
-
-    @Inject
-    private EmployeeServices employeeServices;
-
-    @Inject
-    private AddressServices addressServices;
-
-    /// ////
-
     @Inject
     private AccountServices accountServices;
 
@@ -44,53 +35,6 @@ public class HelloResource {
 
     @Inject
     private UserServices userServices;
-
-    /// Endpoints para las clases de ejemplo realizados en el aula
-
-    @GET
-    @Produces("text/plain")
-    @Path("/get/{id}")
-    public String getEmployee(@PathParam("id") int id) {
-        Employee e = employeeServices.findByIDEmployee(id);
-
-        if(e == null)
-            return "No existe el empleado";
-        else
-            return "Hola " + e.getName();
-    }
-
-    @GET
-    @Produces("text/plain")
-    @Path("/getallemployees")
-    public String getAllEmployee() {
-        text = new StringBuilder();
-        List<Employee> allEmployees = employeeServices.getAllEmployees();
-
-        text.append("Empleados >> \n");
-        for(Employee e:allEmployees){
-            text.append(e.getName()).append("\n");
-        }
-
-        return text.toString();
-    }
-
-    @GET
-    @Produces("text/plain")
-    @Path("/getallemployeesandaddress")
-    public String getAllEmployeeandAddress() {
-        text = new StringBuilder();
-        List<Employee> allEmployeesandAddress = employeeServices.getAllEmployeesWithAddress();
-
-        text.append("Empleados y Direccion>> \n");
-        for(Employee e:allEmployeesandAddress){
-            text.append(e.getName()).append(" - ");
-            text.append(e.getAddress().getStreet()).append("\n");
-        }
-
-        return text.toString();
-    }
-
-    /// Endpoints para el proyecto de pagos
 
     // Usuario
     @POST
@@ -307,8 +251,6 @@ public class HelloResource {
 
         return record;
     }
-
-
 
     @GET
     @Produces("text/plain")

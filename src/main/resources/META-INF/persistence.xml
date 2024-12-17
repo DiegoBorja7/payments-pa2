@@ -9,7 +9,7 @@
         <class>ec.edu.uce.jakarta.notifications.jpa.Message</class>
         <class>ec.edu.uce.jakarta.notifications.jpa.Employee</class>
         <class>ec.edu.uce.jakarta.notifications.jpa.Address</class>
-        <class>ec.edu.uce.jakarta.notifications.jpa.Courses</class>
+        <class>ec.edu.uce.jakarta.notifications.jpa.Course</class>
         <properties>
 
             <property name= "javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/example" />
@@ -34,10 +34,15 @@
         <class>ec.edu.uce.jakarta.payments.model.Account</class>
         <properties>
 
-            <property name= "javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/paymentdb" />
-            <property name= "javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-            <property name= "javax.persistence.jdbc.user" value="postgres" />
-            <property name= "javax.persistence.jdbc.password" value="admin" />
+<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://c8m0261h0c7idk.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d5ib0e5tpqd1a5" />-->
+<!--            <property name="jakarta.persistence.jdbc.user" value="u7avdtrcvkvadp" />-->
+<!--            <property name="javax.persistence.jdbc.password" value="p5d409a8413293482ec53ceaef4848c87c5720625e479d7471ba32e45d4ea17d3" />-->
+<!--            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />-->
+
+            <property name= "jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/paymentdb" />
+            <property name= "jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name= "jakarta.persistence.jdbc.user" value="postgres" />
+            <property name= "jakarta.persistence.jdbc.password" value="admin" />
 
             <property name= "hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />

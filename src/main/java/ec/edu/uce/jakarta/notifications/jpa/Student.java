@@ -2,6 +2,7 @@ package ec.edu.uce.jakarta.notifications.jpa;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 ///POJO Plain old Java Object
 @Entity
@@ -9,6 +10,9 @@ public class Student {
     @Id
     private int id;
     private String name;
+
+    @ManyToOne
+    Course course;
 
     public Student() {}
 
@@ -38,6 +42,7 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", courses=" + course.toString() +
                 '}';
     }
 }

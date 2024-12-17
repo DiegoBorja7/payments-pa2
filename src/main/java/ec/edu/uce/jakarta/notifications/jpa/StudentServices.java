@@ -2,21 +2,30 @@ package ec.edu.uce.jakarta.notifications.jpa;
 
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceUnit;
 
 @Stateless
 public class StudentServices {
-    @PersistenceUnit(unitName = "UnitPersistenceDB")
+    private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
     public StudentServices() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("UnitPersistenceDB");
+        entityManager = entityManagerFactory.createEntityManager();
     }
 
     //create
     public void createStudent(Student student) {
         try {
+            entityManager.getTransaction().begin();
             entityManager.persist(student); // Persiste el nuevo estudiante
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
             e.printStackTrace();
         }
     }

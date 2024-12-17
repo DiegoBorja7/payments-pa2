@@ -8,10 +8,14 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private int age;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
+
+    public Employee() {
+    }
 
     public Address getAddress() {
         return address;
@@ -19,9 +23,6 @@ public class Employee {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public Employee() {
     }
 
     public int getId() {
@@ -38,6 +39,14 @@ public class Employee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override

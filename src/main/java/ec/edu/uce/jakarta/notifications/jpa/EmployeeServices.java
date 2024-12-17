@@ -4,6 +4,9 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,8 +32,6 @@ public class EmployeeServices {
                 entityManager.getTransaction().rollback();
             }
             e.printStackTrace();
-        } finally {
-            entityManager.close();
         }
     }
 
@@ -49,6 +50,7 @@ public class EmployeeServices {
         return employee;
     }
 
+    //Queries SQL
     public List<Employee> getAllEmployees(){
         String query = "SELECT e FROM Employee e";
 
@@ -69,5 +71,17 @@ public class EmployeeServices {
             e.printStackTrace();
             return Collections.emptyList();
         }
+    }
+
+    //Criteria API
+    public List<Employee> getAllEmployeesByAge(int age) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+        Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
+
+        criteriaQuery.select(employeeRoot).where(criteriaBuilder.greaterThan(employeeRoot.get("age"), age));
+
+        return entityManager.createQuery(criteriaQuery).getResultList();
     }
 }
